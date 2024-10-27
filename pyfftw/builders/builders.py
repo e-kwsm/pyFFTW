@@ -103,7 +103,7 @@ forward FFT is scaled by 1/N and the backward is unscaled (exact opposite of
 the ``"backward"`` case). The default case is ``norm == "backward"``.
 
 In all three cases, using the same ``norm`` value for both the forward and the
-backward FFT ensures *roundtrip equality*, i.e. that applying the forwad and
+backward FFT ensures *roundtrip equality*, i.e. that applying the forward and
 then the backward FFT to an input array returns the original array (up to
 numerical accuracy).
 

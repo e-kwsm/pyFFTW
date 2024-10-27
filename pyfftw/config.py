@@ -1,6 +1,6 @@
 """Global configuration variables for PyFFTW.
 
-The approach taken here was adapated from Numba's config.py.
+The approach taken here was adapted from Numba's config.py.
 """
 
 from __future__ import print_function, division, absolute_import
