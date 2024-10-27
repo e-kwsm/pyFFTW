@@ -572,7 +572,7 @@ cdef bint _validate_r2c_arrays(np.ndarray input_array,
     ''' Validates the input and output array to check for
     a valid real to complex transform.
     '''
-    # We firstly need to confirm that the dimenions of the arrays
+    # We firstly need to confirm that the dimensions of the arrays
     # are the same
     if not (input_array.ndim == output_array.ndim):
         return False
@@ -604,7 +604,7 @@ cdef bint _validate_c2r_arrays(np.ndarray input_array,
     a valid complex to real transform.
     '''
 
-    # We firstly need to confirm that the dimenions of the arrays
+    # We firstly need to confirm that the dimensions of the arrays
     # are the same
     if not (input_array.ndim == output_array.ndim):
         return False
@@ -2058,7 +2058,7 @@ cdef void execute_in_nogil(fftw_exe* exe_ptr) noexcept nogil:
 
 cdef void count_char(char c, void *counter_ptr) noexcept nogil:
     '''
-    On every call, increment the derefenced counter_ptr.
+    On every call, increment the dereferenced counter_ptr.
     '''
     (<int *>counter_ptr)[0] += 1
 
@@ -2074,7 +2074,7 @@ cdef void write_char_to_string(char c, void *string_location_ptr) noexcept nogil
     to a string that is referenced by the dereferenced value of
     string_location_ptr.
 
-    If the derefenced value of string_location points to an
+    If the dereferenced value of string_location points to an
     unallocated piece of memory, a segfault will likely occur.
     '''
     cdef char *write_location = <char *>((<intptr_t *>string_location_ptr)[0])
