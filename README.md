@@ -135,10 +135,10 @@ at runtime if asked to perform a transform involving long double precision.
 To build against FFTW libraries at non standard location, [some compilers are
 sensitive to the environment
 variables](https://gcc.gnu.org/onlinedocs/gcc/Environment-Variables.html)
-`CPATH` and `LIBRARY_PATH`. Moreover, you can also use `PYFFTW_INCLUDE` and
-`PYFFTW_LIB_DIR`. If the FFTW libraries still cannot be found, you might also
-need to set the environment variable `CC` to build with the compiler used to
-compile the libraries.
+`CPATH` and `LIBRARY_PATH`. Moreover, you can also use `PYFFTW_FFTW_PREFIX`,
+or alternatively, `PYFFTW_INCLUDE` and `PYFFTW_LIB_DIR`. If the FFTW libraries
+still cannot be found, you might also need to set the environment variable `CC`
+to build with the compiler used to compile the libraries.
 
 Regarding multithreading, if both posix and openMP FFTW libs are available, the
 openMP libs are preferred. This preference can be reversed by defining the
