@@ -123,14 +123,10 @@ That cythonizes the python extension and builds it into a shared library
 which is placed in ``pyfftw/``. The directory can then be treated as a python
 package.
 
-After you've run ``setup.py`` with cython available, you then have a
-normal C extension in the ``pyfftw`` directory.
-Further building does not depend on cython (as long as the .c file remains).
-
-During configuration the available FFTW libraries are detected, so pay attention
-to the output when running ``setup.py``. On certain platforms, for example the
-long double precision is not available. pyFFTW still builds fine but will fail
-at runtime if asked to perform a transform involving long double precision.
+During installation the available FFTW libraries are detected, so pay attention
+to the output. On certain platforms, for example the long double precision is
+not available. pyFFTW still builds fine but will fail at runtime if asked to
+perform a transform involving long double precision.
 
 To build against FFTW libraries at non standard location, [some compilers are
 sensitive to the environment
@@ -164,9 +160,8 @@ The builds on PyPI use mingw for the 32-bit release and the Windows SDK
 C++ compiler for the 64-bit release. The scripts should handle this
 automatically. If you want to compile for 64-bit Windows, you have to use
 the MS Visual C++ compiler. Set up your environment as described
-[here](https://github.com/cython/cython/wiki/CythonExtensionsOnWindows) and then
-run ``setup.py`` with the version of python you wish to target and a suitable
-build command.
+[here](https://github.com/cython/cython/wiki/CythonExtensionsOnWindows) and
+build with the version of python you wish to target.
 
 For using the MS Visual C++ compiler, you'll need to create a set of
 suitable ``.lib`` files as described on the
