@@ -178,22 +178,14 @@ Install FFTW from [homebrew](http://brew.sh):
 
     brew install fftw
 
-Set temporary environmental variables, such that pyfftw finds fftw:
+Now install pyfftw from source with `PYFFTW_FFTW_PREFIX`:
 
-    export DYLD_LIBRARY_PATH=/usr/local/lib
-    export LDFLAGS="-L/usr/local/lib"
-    export CPPFLAGS="-I/usr/local/include"
-
-Now install pyfftw from pip:
-
-    pip install pyfftw
+    pip cache remove pyfftw
+    PYFFTW_FFTW_PREFIX=$(brew --prefix fftw) pip install pyfftw --no-binary pyfftw
 
 It has been suggested that [macports](https://www.macports.org) might also work
-fine. You should then replace the LD environmental variables above with the
-right ones.
-
-- DYLD_LIBRARY_PATH - path for libfftw3.dylib etc - ``find /usr -name libfftw3.dylib``
-- LDFLAGS - path for fftw3.h - ``find /usr -name fftw3.h``
+fine. FFTW directories can be found by running `find /usr -name libfftw3.dylib`
+and `find /usr -name fftw3.h`.
 
 #### FreeBSD
 
