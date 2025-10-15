@@ -60,6 +60,20 @@ if os.environ.get("READTHEDOCS") == "True":
     os.environ["AR"] = "x86_64-linux-gnu-ar"
 
 
+PYFFTW_FFTW_PREFIX = os.environ.get("PYFFTW_FFTW_PREFIX", None)
+if PYFFTW_FFTW_PREFIX is not None:
+    if "PYFFTW_INCLUDE" in os.environ:
+        raise RuntimeError(
+            "PYFFTW_FFTW_PREFIX and PYFFTW_INCLUDE cannot be used together"
+        )
+    if "PYFFTW_LIB_DIR" in os.environ:
+        raise RuntimeError(
+            "PYFFTW_FFTW_PREFIX and PYFFTW_LIB_DIR cannot be used together"
+        )
+    os.environ["PYFFTW_INCLUDE"] = os.path.join(PYFFTW_FFTW_PREFIX, "include")
+    os.environ["PYFFTW_LIB_DIR"] = os.path.join(PYFFTW_FFTW_PREFIX, "lib")
+
+
 def _get_mac_os_homebrew_prefix() -> str:
     """macOS on Apple Silicon can run binaries as native arm64, or in x86_64 emulation.
     Homebrew therefore supports both use cases, and sets up independent sysroots in /opt/homebrew (for arm64 packages)

@@ -123,22 +123,18 @@ That cythonizes the python extension and builds it into a shared library
 which is placed in ``pyfftw/``. The directory can then be treated as a python
 package.
 
-After you've run ``setup.py`` with cython available, you then have a
-normal C extension in the ``pyfftw`` directory.
-Further building does not depend on cython (as long as the .c file remains).
-
-During configuration the available FFTW libraries are detected, so pay attention
-to the output when running ``setup.py``. On certain platforms, for example the
-long double precision is not available. pyFFTW still builds fine but will fail
-at runtime if asked to perform a transform involving long double precision.
+During installation the available FFTW libraries are detected, so pay attention
+to the output. On certain platforms, for example the long double precision is
+not available. pyFFTW still builds fine but will fail at runtime if asked to
+perform a transform involving long double precision.
 
 To build against FFTW libraries at non standard location, [some compilers are
 sensitive to the environment
 variables](https://gcc.gnu.org/onlinedocs/gcc/Environment-Variables.html)
-`CPATH` and `LIBRARY_PATH`. Moreover, you can also use `PYFFTW_INCLUDE` and
-`PYFFTW_LIB_DIR`. If the FFTW libraries still cannot be found, you might also
-need to set the environment variable `CC` to build with the compiler used to
-compile the libraries.
+`CPATH` and `LIBRARY_PATH`. Moreover, you can also use `PYFFTW_FFTW_PREFIX`,
+or alternatively, `PYFFTW_INCLUDE` and `PYFFTW_LIB_DIR`. If the FFTW libraries
+still cannot be found, you might also need to set the environment variable `CC`
+to build with the compiler used to compile the libraries.
 
 Regarding multithreading, if both posix and openMP FFTW libs are available, the
 openMP libs are preferred. This preference can be reversed by defining the
@@ -164,9 +160,8 @@ The builds on PyPI use mingw for the 32-bit release and the Windows SDK
 C++ compiler for the 64-bit release. The scripts should handle this
 automatically. If you want to compile for 64-bit Windows, you have to use
 the MS Visual C++ compiler. Set up your environment as described
-[here](https://github.com/cython/cython/wiki/CythonExtensionsOnWindows) and then
-run ``setup.py`` with the version of python you wish to target and a suitable
-build command.
+[here](https://github.com/cython/cython/wiki/CythonExtensionsOnWindows) and
+build with the version of python you wish to target.
 
 For using the MS Visual C++ compiler, you'll need to create a set of
 suitable ``.lib`` files as described on the
@@ -178,22 +173,14 @@ Install FFTW from [homebrew](http://brew.sh):
 
     brew install fftw
 
-Set temporary environmental variables, such that pyfftw finds fftw:
+Now install pyfftw from source with `PYFFTW_FFTW_PREFIX`:
 
-    export DYLD_LIBRARY_PATH=/usr/local/lib
-    export LDFLAGS="-L/usr/local/lib"
-    export CPPFLAGS="-I/usr/local/include"
-
-Now install pyfftw from pip:
-
-    pip install pyfftw
+    pip cache remove pyfftw
+    PYFFTW_FFTW_PREFIX=$(brew --prefix fftw) pip install pyfftw --no-binary pyfftw
 
 It has been suggested that [macports](https://www.macports.org) might also work
-fine. You should then replace the LD environmental variables above with the
-right ones.
-
-- DYLD_LIBRARY_PATH - path for libfftw3.dylib etc - ``find /usr -name libfftw3.dylib``
-- LDFLAGS - path for fftw3.h - ``find /usr -name fftw3.h``
+fine. FFTW directories can be found by running `find /usr -name libfftw3.dylib`
+and `find /usr -name fftw3.h`.
 
 #### FreeBSD
 
